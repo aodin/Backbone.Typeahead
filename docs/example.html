@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Backbone.Typeahead Example</title>
+  <link rel="stylesheet" type="text/css" href="../tests/lib/bootstrap.min.css">
+</head>
+<body>
+  <div id="main" style="margin-top:25px;margin-left:25px"></div>
+  <script src="../tests/lib/jquery-1.9.1.min.js"></script>
+  <script src="../tests/lib/underscore-1.4.4.min.js"></script>
+  <script src="../tests/lib/backbone-0.9.10.min.js"></script>
+  <script src="../backbone.typeahead.js"></script>
+  <script type="text/javascript">
+$(function() {
+  console.log('alive:', Backbone.Typeahead);
+
+  var example = [
+    {name: 'Alabama'},
+    {name: 'Michigan'},
+    {name: 'Minnesota'},
+    {name: 'Nevada'},
+    {name: 'Ohio'},
+    {name: 'New York'},
+  ];
+
+  var typeahead = new Backbone.Typeahead(example);
+
+  console.log(typeahead);
+  typeahead.view.setElement('#main').render();
+
+
+});
+  </script>
+</body>
+</html>
