@@ -13,8 +13,6 @@
   <script src="../backbone.typeahead.js"></script>
   <script type="text/javascript">
 $(function() {
-  console.log('alive:', Backbone.Typeahead);
-
   var example = [
     {name: 'Alabama'},
     {name: 'Michigan'},
@@ -23,13 +21,7 @@ $(function() {
     {name: 'Ohio'},
     {name: 'New York'},
   ];
-
-  var typeahead = new Backbone.Typeahead(example);
-
-  console.log(typeahead);
-  typeahead.view.setElement('#main').render();
-
-
+  var typeahead = new Backbone.Typeahead(example, {el: '#main'});
 });
   </script>
 </body>
