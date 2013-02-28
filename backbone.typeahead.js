@@ -19,14 +19,13 @@
     model: Typeahead.Model,
     initialize: function(models, options) {
       options || (options = {});
-      if (_.result(this, 'url')) { // TODO and/or check options
-        // TODO Remote collection
+      if (options.url) this.url = options.url;
+      if (_.result(this, 'url')) {
+        _.extend(this, Typeahead.RemoteCollection);
       } else {
         _.extend(this, Typeahead.LocalCollection);
         this._queryset = models.slice(0);
         models.length = 0;
-        // TODO A more predictable method:
-        // models.splice(0, models.length);
       }
       // If no search key is given, default to 'name'
       this._key = options.key || 'name';
@@ -64,6 +63,18 @@
 
   Typeahead.RemoteCollection = {
     // the 'matcher' function is now a server-side operation
+    search: function(key, value) {
+      // FYI this behavior varies from the normal list
+      // On an empty search, it resets the collection
+      this._data = this._data || {};
+      if (!value) {
+        delete this._data[key];
+        this.reset();
+        return;
+      }
+      this._data[key] = value;
+      this.fetch({data: this._data});
+    },
   };
 
   Typeahead.Item = Backbone.View.extend({
