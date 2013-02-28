@@ -11,7 +11,6 @@ var queryset = [
 
 describe('Objects Inherited from Typeahead', function() {
   // Create a new object that inherits from typeahead
-
   var Inherited = Typeahead.extend({
     method: function() {
       // A blank, extended method
@@ -25,7 +24,15 @@ describe('Objects Inherited from Typeahead', function() {
     expect(inherit._queryset).toEqual(queryset);
   });
 
-  // TODO attempt to overwrite some behaviors
+  // TODO attempt to overwrite some behaviors, such as parse, comparator
+
+});
+
+describe('Improperly Configured Typeahead', function() {
+
+  it('can not be created', function() {
+    expect(function() { new Typeahead(); }).toThrow();
+  });
 
 });
 
@@ -163,7 +170,7 @@ describe('Remote Typeahead', function() {
     {name: 'New York'},
   ];
   
-  it('should initialize a remote collection when no URL exists', function() {
+  it('should initialize a remote collection when an URL exists', function() {
     // Check that the local methods have been created
     expect(typeahead.search).toBe(Typeahead.RemoteCollection.search);
 

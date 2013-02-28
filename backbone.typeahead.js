@@ -1,7 +1,7 @@
 (function() {
   var Typeahead = function(models, options) {
     // TODO call with arguments?
-    Backbone.Collection.call(this, models.slice(0), options);
+    Backbone.Collection.call(this, _.isArray(models) ? models.slice(0) : [], options);
   }
 
   Typeahead.extend = Backbone.Collection.extend;
@@ -22,16 +22,16 @@
       if (options.url) this.url = options.url;
       if (_.result(this, 'url')) {
         _.extend(this, Typeahead.RemoteCollection);
-      } else {
+      } else if (models && models.length) {
         _.extend(this, Typeahead.LocalCollection);
         this._queryset = models.slice(0);
         models.length = 0;
+      } else {
+        // For now, the typeahead must have either a URL or initial models
+        throw new Error('A typeahead must be created with either initial models (creating a local typeahead) or with a url in the options (creating a remote typeahead)');
       }
       // If no search key is given, default to 'name'
       this._key = options.key || 'name';
-
-      // TODO Only initialize local collection if it has models, otherwise,
-      // throw an error
 
       // Create the view, it should either be provided an 'el' in options or
       // have its setElement function called
