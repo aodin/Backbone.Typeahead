@@ -33,13 +33,19 @@
       // If no search key is given, default to 'name'
       this._key = options.key || 'name';
 
+      // TODO what should be loaded directly into the namespace and what should
+      // be left in options?
+      // TODO defaults should be a separate object
+      this.options = options;
+
       // Create the view, it should either be provided an 'el' in options or
       // have its setElement function called
       _.extend(options, {collection: this});
       this.view = new Typeahead.View(options);
 
-      // TODO bootstrap options
-      // items: 8
+      // TODO Defaults using .extend()
+      options.items || (options.items = 8);
+
       // menu: '<ul class="typeahead dropdown-menu"></ul>'
       // item: '<li><a href="#"></a></li>'
       // minLength: 1
@@ -57,7 +63,9 @@
     },
     search: function(key, value) {
       // TODO trim value before truthiness testing?
-      this.reset(value ? _.filter(this._queryset, function(item) { return this.matcher(item[key], value); }, this) : []);
+      // Search should be as fast as possible - this does not seem very fast
+      var items = value ? _.filter(this._queryset, function(item) { return this.matcher(item[key], value); }, this) : [];
+      this.reset(items.slice(0, this.options.items));
     },
   };
 
@@ -106,6 +114,9 @@
       'mouseleave': 'mouseleave',
     },
     initialize: function(options) {
+      // Parse options passed from the parent collection
+      if (options.template) this.template = options.template;
+
       this.collection.on('preselect', this.selectModel, this);
       this.collection.on('reset', this.renderItems, this);
       // Boolean toggles
@@ -119,8 +130,8 @@
     render: function() {
       this.$el.html(_.template(this.template));
       this.$menu = this.$('ul');
-      // TODO only supports one input for now
-      this.$input = this.$('input');
+      // TODO only supports first input for now - more specific selector?
+      this.$input = this.$('input').first();
       return this;
     },
     renderItems: function() {
@@ -143,7 +154,17 @@
     searchItems: function(e) {
       // TODO wait for input greater than a minimum number of characters
       // TODO put key second so it can be optional?
-      this.collection.search(this.collection._key, this.$input.val());
+      // Only remove the selected model if the input has changed
+      // TODO last selected model?
+      var val = this.$input.val();
+      if (this._prev && this._prev !== val) {
+        if (!_.isUndefined(this.collection.selected)) {
+          this.collection.selected = undefined;
+          this.collection.trigger('deselect', this);
+        }
+      }
+      this._prev = val;
+      this.collection.search(this.collection._key, val);
     },
     keydown: function(e) {
       this.suppressKeyPressRepeat = ~$.inArray(e.keyCode, [40,38,9,13,27]);
@@ -211,7 +232,8 @@
       this.collection.selected = model;
       this.$input.val(model.get(this.collection._key));
       this.hide();
-      this.collection.trigger('select', model);
+      // Pass the typeahead itself as the second trigger parameter
+      this.collection.trigger('select', model, this);
       // Reset the collection and set its search data to an empty value
       // TODO Add the selected model as the only item?
       this.collection.search(this.collection._key, '');
@@ -249,8 +271,7 @@
       next.addClass('active');
     },
     focus: function() {
-      // Only show the results list if there are items (indicated by this.shown)
-      // if (this.shown) this.show();
+      // Only show the results list if there are items indicated by this.shown
       this.focused = true;
       // TODO Only show if no item is selected
       if (!this.shown) this.show();
@@ -265,7 +286,7 @@
     },
     mouseleave: function(e) {
       this.mousedover = false;
-      if (!this.focused && this.shown) this.hide()
+      if (!this.focused && this.shown) this.hide();
     },
   });
 

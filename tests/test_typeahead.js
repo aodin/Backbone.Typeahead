@@ -117,6 +117,10 @@ describe('Local Typeahead', function() {
     it('does not overwrite the _queryset parameter', function() {
       expect(typeahead._queryset).toEqual(queryset);
     });
+
+    it('should leave the "selected" parameter undefined', function() {
+      expect(typeahead.selected).toBeUndefined();
+    });
     // End empty local search suite
   });
 
@@ -135,10 +139,17 @@ describe('Local Typeahead', function() {
       expect(selectSpy.calledOnce).toBeTruthy();
       // Check the first argument of the first call (hence [0][0])
       // TODO check that the returned object is an instance of a model
-      expect(selectSpy.args[0][0]).toBeDefined()
+      expect(selectSpy.args[0][0]).toBeDefined();
+
+      // The 'selected' boolean should be true
+      expect(typeahead.selected).toBeDefined();
 
       // TODO test multiple calls
       // console.log('spy:', selectSpy.callCount)
+
+      // TODO Changing the search input should remove the selected parameter
+      // TODO it should also fire a deselect event
+
     });
 
   });
