@@ -1,7 +1,11 @@
 (function() {
   var Typeahead = function(models, options) {
-    // TODO call with arguments?
-    Backbone.Collection.call(this, _.isArray(models) ? models.slice(0) : [], options);
+    // Immediately create a copy of the given models
+    // TODO Allow another collection to be used as models
+    models = _.isArray(models) ? models.slice(0) : [];
+    this.preInitialize.apply(this, arguments);
+    Backbone.Collection.apply(this, arguments);
+    this.postInitialize.apply(this, arguments);
   }
 
   Typeahead.extend = Backbone.Collection.extend;
@@ -17,26 +21,36 @@
 
   _.extend(Typeahead.prototype, Backbone.Collection.prototype, {
     model: Typeahead.Model,
-    initialize: function(models, options) {
+    // Pre-initialization should set up the collection type (remote / local)
+    // and clear out the models that would be passed to the initialize
+    preInitialize: function(models, options) {
       options || (options = {});
+      // Attaching url to "this" also occurs in the constructor
       if (options.url) this.url = options.url;
       if (_.result(this, 'url')) {
         _.extend(this, Typeahead.RemoteCollection);
       } else if (models && models.length) {
         _.extend(this, Typeahead.LocalCollection);
         this._queryset = models.slice(0);
+        // Clear out the referenced array object
         models.length = 0;
       } else {
         // For now, the typeahead must have either a URL or initial models
         throw new Error('A typeahead must be created with either initial models (creating a local typeahead) or with a url in the options (creating a remote typeahead)');
       }
+    },
+    // Models were emptied by the preInitialization function. The parent
+    // Backbone.Collection constructor function should have finished.
+    postInitialize: function(models, options) {
+      // Parse the given options, providing sane defaults where necessary
+      options || (options = {});
+      this.options = options;
+
       // If no search key is given, default to 'name'
       this._key = options.key || 'name';
 
       // TODO what should be loaded directly into the namespace and what should
       // be left in options?
-      // TODO defaults should be a separate object
-      this.options = options;
 
       // Create the view, it should either be provided an 'el' in options or
       // have its setElement function called
@@ -81,7 +95,7 @@
         return;
       }
       this._data[key] = value;
-      this.fetch({data: this._data});
+      this.fetch({data: this._data, reset: true});
     },
   };
 
@@ -117,8 +131,9 @@
       // Parse options passed from the parent collection
       if (options.template) this.template = options.template;
 
-      this.collection.on('preselect', this.selectModel, this);
-      this.collection.on('reset', this.renderItems, this);
+      this.listenTo(this.collection, 'preselect', this.selectModel);
+      this.listenTo(this.collection, 'reset', this.renderItems);
+
       // Boolean toggles
       this.focused = false;
       this.shown = false;

@@ -111,7 +111,7 @@ describe('Local Typeahead', function() {
     });
 
     it('should fire a "reset" signal', function() {
-      expect(resetSpy.calledOnce).toBeTruthy();
+      expect(resetSpy.calledOnce).toBe(true);
     });
 
     it('does not overwrite the _queryset parameter', function() {
@@ -137,9 +137,9 @@ describe('Local Typeahead', function() {
       typeahead.view.select.call(typeahead.view);
 
       expect(selectSpy.calledOnce).toBeTruthy();
-      // Check the first argument of the first call (hence [0][0])
+      // Check that the first argument of the first call is a Backbone Model
       // TODO check that the returned object is an instance of a model
-      expect(selectSpy.args[0][0]).toBeDefined();
+      expect(selectSpy.firstCall.args[0]).toBeDefined();
 
       // The 'selected' boolean should be true
       expect(typeahead.selected).toBeDefined();
@@ -220,8 +220,9 @@ describe('Remote Typeahead', function() {
       typeahead.search.call(typeahead, typeahead._key, 'ne');
       server.respond(); // Process all requests so far
       expect(typeahead.length).toEqual(3);
-
-      expect(resetSpy.calledOnce).toBeTruthy();
+      console.log(resetSpy);
+      console.log('reset spy count', resetSpy.callCount);
+      expect(resetSpy.calledOnce).toBe(true);
     });
 
   });
@@ -254,7 +255,7 @@ describe('Remote Typeahead', function() {
       server.respond(); // Process all requests so far
       expect(typeahead.length).toEqual(3);
       expect(server.requests.length).toEqual(1);
-      expect(resetSpy.callCount).toEqual(1);
+      expect(resetSpy.calledOnce).toBe(true);
 
       // Send an empty search
       typeahead.search.call(typeahead, typeahead._key, '');
