@@ -24,11 +24,9 @@ $(function() {
 
 
   var LocalExample = Backbone.Typeahead.extend({
-    initialize: function() {
-      console.log('init');
-    }
+    initialize: function() {}
   });
-  var typeahead = new LocalExample(example, {el: '#main'});
+  var typeahead = new LocalExample(example);
 
 
 });
