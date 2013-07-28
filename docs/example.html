@@ -6,29 +6,43 @@
   <link rel="stylesheet" type="text/css" href="../lib/bootstrap.min.css">
 </head>
 <body>
-  <div id="main" style="margin-top:25px;margin-left:25px"></div>
+  <div id="main" style="margin-top:25px;margin-left:25px">
+    <div>
+      <h3>Basic</h3>
+      <div id="basic"></div>
+    </div>
+    <div>
+      <h3>Collection</h3>
+      <div id="collection"></div>
+    </div>
+  </div>
   <script src="../lib/jquery-1.10.2.min.js"></script>
   <script src="../lib/underscore-1.5.1.min.js"></script>
   <script src="../lib/backbone-1.0.0.min.js"></script>
   <script src="../backbone.typeahead.js"></script>
   <script type="text/javascript">
 $(function() {
-  var example = [
+  var states = [
+    {name: 'Nevada'},
     {name: 'Alabama'},
     {name: 'Michigan'},
     {name: 'Minnesota'},
-    {name: 'Nevada'},
     {name: 'Ohio'},
     {name: 'New York'},
   ];
 
+  var basic = new Backbone.Typeahead(states);
+  basic.setElement('#basic').render();
 
-  var LocalExample = Backbone.Typeahead.extend({
-    initialize: function() {}
-  });
-  var typeahead = new LocalExample(example);
+  var Alpha = Backbone.Collection.extend({
+    comparator: function(model) {
+      return model.get('name');
+    }
+  })
+  var alpha = new Alpha(states);
 
-
+  var customCollection = new Backbone.Typeahead({collection: alpha});
+  customCollection.setElement('#collection').render();
 });
   </script>
 </body>
