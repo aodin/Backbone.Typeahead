@@ -1,41 +1,73 @@
 Backbone.Typeahead
 ==================
 
-A Bootstrap inspired Typeahead for Backbone.js
+A Bootstrap inspired Typeahead for Backbone.js 1.0.0
 
-Can be used to create typeaheads that pull from local or remote sources.
+Now using Bootstrap version 3 styles! See `docs/bootstrap2.html` for an example using the old Bootstrap styles.
 
-### Example Usage
+### Quickstart
 
-For local usage, provide it with a queryset as the first parameter. Do **not** provide it with a URL or a remote collection will be created. The typeahead's template will be rendered at the `el` provided in the options.
+To quickly create a typeahead, provide the the constructor with an array of objects to be searched. By default, the typeahead will search the key `name`.
 
-    var typeahead = new Backbone.Typeahead(queryset, {el: '#main'});
+```javascript
+var queryset = [
+    {name: 'Super Bass-O-Matic 1976'},
+    {name: 'Jam Hawkers'},
+    {name: 'HiberNol'},
+    {name: 'Colon Blow'},
+];
 
-For remote usage, provide the collection with a URL in the options:
+var typeahead = new Backbone.Typeahead(queryset);
+$('#main').html(typeahead.render().el);
+```
 
-    var typeahead = new Backbone.Typeahead([], {url: '/api/queryset', el: '#main'});
+The typeahead also plays nice with `setElement`:
 
-Since the Typeahead inherits from the `Backbone.Collection` object, the collection methods can be overwritten by using the `.extend()` method:
+```javascript
+var typeahead = new Backbone.Typeahead(queryset);
+typeahead.setElement('#main').render();
+```
 
-    var Inherited = Backbone.Typeahead.extend({
-        parse: function(response, options) {
-            return response.results || response;
-        },
-    });
+### Passing a Collection
 
+The typeahead is built upon a `Backbone.View` and accepts a `Backbone.Collection` as the option `collection`:
 
-### How It Differs
+```javascript
+var queryset = [
+    {name: 'Super Bass-O-Matic 1976'},
+    {name: 'Jam Hawkers'},
+    {name: 'HiberNol'},
+    {name: 'Colon Blow'},
+];
+var products = new Backbone.Collection(queryset);
 
-Changed behaviors include:
-* Menu reappears on input focus if not item has been selected
+var typeahead = new Backbone.Typeahead({collection: products});
+typeahead.setElement('#main').render();
+```
 
-Additions:
-* The Typeahead will fire a 'select' event upon Model selection
+### Options
 
+Pass the option `key` to search by a different attribute:
 
-### Work in Progress
+```javascript
+var queryset = [
+    {label: 'Super Bass-O-Matic 1976', year: 1976},
+    {label: 'Jam Hawkers', year: 1977},
+    {label: 'HiberNol', year: 1988},
+    {label: 'Colon Blow', year: 1983},
+];
 
-This project is still a work in progress. A few plan improvements:
-* Better way to access the typeahead's extended methods (the collection's view, the model, and the model's view are attached directly to the `Typeahead` object; a proxy for extending these underlying objects should exist)
-* Better testing of the DOM rendering.
-* Better documentation of API / available options
+var typeahead = new Backbone.Typeahead(queryset, {key: 'label'});
+$('#main').html(typeahead.render().el);
+```
+
+Pass the option `itemTemplate` to render the search results with a different template:
+
+```javascript
+var typeahead = new Backbone.Typeahead(queryset, {key: 'label', itemTemplate: '<a><strong><%- label %></strong> (<%- year %>)</a>'});
+$('#main').html(typeahead.render().el);
+```
+
+The typeahead was built for easy extension. Check out the `docs` and `tests` for examples.
+
+> aodin, 2013
