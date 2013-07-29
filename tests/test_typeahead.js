@@ -36,11 +36,11 @@ describe('Typeahead', function() {
     });
 
     it('accepts an array of models and an options object', function() {
-      var t = new Typeahead(states, {key: 'label', limit: 8});
+      var t = new Typeahead(states, {key: 'label', limit: 5});
       expect(t).toBeDefined();
       expect(_.isObject(t.options)).toBe(true);
       expect(t.options.key).toBe('label');
-      expect(t.options.limit).toBe(8);
+      expect(t.options.limit).toBe(5);
 
       // A collection should always exist
       expect(t.collection).toBeDefined();
@@ -51,7 +51,7 @@ describe('Typeahead', function() {
       var t = new Typeahead(states);
       expect(_.isObject(t.options)).toBe(true);
       expect(t.options.key).toBe('name');
-      expect(t.options.limit).toBe(6);
+      expect(t.options.limit).toBe(8);
 
       // A collection should always exist
       expect(t.collection).toBeDefined();

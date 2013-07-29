@@ -52,7 +52,7 @@
       // Set sane defaults
       // TODO Allow compound keys? Introspect first model for a default key?
       options.key || (options.key = 'name');
-      options.limit || (options.limit = 6);
+      options.limit || (options.limit = 8);
 
       if (_.isUndefined(options.collection) && _.isArray(models)) {
         // TODO Any properties of collections that options can't handle?
