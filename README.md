@@ -24,15 +24,14 @@ $('#main').html(typeahead.render().el);
 The typeahead also plays nice with `setElement`:
 
 ```javascript
-var typeahead = new Backbone.Typeahead(queryset);
 typeahead.setElement('#main').render();
 ```
 
-When the user selects an item the typeahead will emit a `selected` event with the selected model as its first parameter:
+The typeahead will emit a `selected` event when the user selects an item. The selected model is accessible as the first parameter of the callback:
 
 ```javascript
 typeahead.on('selected', function(model) {
-    console.log('The user has selected', model);
+    console.log('The user has selected:', model);
 });
 ```
 
@@ -74,7 +73,9 @@ $('#main').html(typeahead.render().el);
 Pass the option `itemTemplate` to render the search results with a different template:
 
 ```javascript
-var typeahead = new Backbone.Typeahead(queryset, {key: 'label', itemTemplate: '<a><strong><%- label %></strong> (<%- year %>)</a>'});
+
+var itemTemplate = '<a><strong><%- label %></strong> (<%- year %>)</a>';
+var typeahead = new Backbone.Typeahead(queryset, {key: 'label', itemTemplate: itemTemplate});
 $('#main').html(typeahead.render().el);
 ```
 
