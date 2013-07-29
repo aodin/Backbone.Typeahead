@@ -28,6 +28,15 @@ var typeahead = new Backbone.Typeahead(queryset);
 typeahead.setElement('#main').render();
 ```
 
+When the user selects an item the typeahead will emit a `selected` event with the selected model as its first parameter:
+
+```javascript
+typeahead.on('selected', function(model) {
+    console.log('The user has selected', model);
+});
+```
+
+
 ### Passing a Collection
 
 The typeahead is built upon a `Backbone.View` and accepts a `Backbone.Collection` as the option `collection`:
@@ -44,6 +53,7 @@ var products = new Backbone.Collection(queryset);
 var typeahead = new Backbone.Typeahead({collection: products});
 typeahead.setElement('#main').render();
 ```
+
 
 ### Options
 
