@@ -3,17 +3,13 @@
 <head>
   <meta charset="utf-8">
   <title>Backbone.Typeahead Example</title>
-  <link rel="stylesheet" type="text/css" href="../lib/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="../lib/bootstrap-2.3.2.min.css">
 </head>
 <body>
   <div id="main" style="margin-top:25px;margin-left:25px">
-    <div class="row">
-      <h3>Basic</h3>
-      <div id="basic" class="col-lg-4 col-sm-6"></div>
-    </div>
-    <div class="row">
-      <h3>Collection</h3>
-      <div id="collection" class="col-lg-4 col-sm-6"></div>
+    <div>
+      <h3>Bootstrap v2.3.2 Styles</h3>
+      <div id="bootstrap2"></div>
     </div>
   </div>
   <script src="../lib/jquery-1.10.2.min.js"></script>
@@ -31,18 +27,11 @@ $(function() {
     {name: 'New York'},
   ];
 
-  var basic = new Backbone.Typeahead(states);
-  basic.setElement('#basic').render();
-
-  var Alpha = Backbone.Collection.extend({
-    comparator: function(model) {
-      return model.get('name');
-    }
+  var Bootstrap2 = Backbone.Typeahead.extend({
+    template: '<input type="text" placeholder="Search" /><ul class="typeahead dropdown-menu"></ul>',
   })
-  var alpha = new Alpha(states);
-
-  var customCollection = new Backbone.Typeahead({collection: alpha});
-  customCollection.setElement('#collection').render();
+  var typeahead = new Bootstrap2(states);
+  typeahead.setElement('#bootstrap2').render();
 });
   </script>
 </body>
