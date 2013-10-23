@@ -20,6 +20,7 @@
     this.postInitialize.call(this);
   }
 
+  Typeahead.VERSION = '0.1.0';
   Typeahead.extend = Backbone.View.extend;
 
   // TODO Use a preInit/postInit style view
@@ -129,6 +130,10 @@
       return this.collection.filter(function(model) {
           return re.test(model.get(key));
       });
+    },
+    // Convenience method for clearing the search input
+    clearInput: function() {
+      this.$input.val('');
     },
     // Pull the value from the search input and re-render the matched models
     searchInput: function() {
