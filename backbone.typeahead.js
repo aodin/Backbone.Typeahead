@@ -20,7 +20,7 @@
     this.postInitialize.call(this);
   }
 
-  Typeahead.VERSION = '0.1.0';
+  Typeahead.VERSION = '0.1.1';
   Typeahead.extend = Backbone.View.extend;
 
   // TODO Use a preInit/postInit style view
@@ -78,6 +78,9 @@
 
       // Attach native events, deferring to custom events
       this.events = _.extend({}, this.nativeEvents, _.result(this, 'events'));
+
+      // Backbone 1.1 no longer binds options to this by default
+      this.options = options;
 
       // TODO Listen to changes on the collection
     },

@@ -1,9 +1,12 @@
 Backbone.Typeahead
 ==================
 
-A Bootstrap inspired Typeahead for Backbone.js 1.0.0
+A Bootstrap inspired Typeahead for Backbone.js 1.1.0
 
-Now using Bootstrap version 3 styles! See `docs/bootstrap2.html` for an example using the old Bootstrap styles.
+Looking for Backbone.js 1.0.0 support? Check out release `v0.1.0`.
+
+Now using Bootstrap version 3 styles!
+See `docs/bootstrap2.html` for an example using the old Bootstrap styles.
 
 ### Quickstart
 
