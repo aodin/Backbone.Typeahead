@@ -84,4 +84,12 @@ $('#main').html(typeahead.render().el);
 
 The typeahead was built for easy extension. Check out the `docs` and `tests` for examples.
 
+
+### Minification
+
+A minified version and source map are provided. Minification was performed with [UglifyJS2](https://github.com/mishoo/UglifyJS2) using the command:
+
+    uglifyjs backbone.typeahead.js -o backbone.typeahead.min.js --source-map backbone.typeahead.min.js.map -c -m
+
+
 > aodin, 2013
