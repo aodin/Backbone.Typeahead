@@ -54,6 +54,7 @@
       // TODO Allow compound keys? Introspect first model for a default key?
       options.key || (options.key = 'name');
       options.limit || (options.limit = 8);
+      options.placeholder || (options.placeholder = 'Search');
 
       if (_.isUndefined(options.collection) && _.isArray(models)) {
         // TODO Any properties of collections that options can't handle?
@@ -66,7 +67,7 @@
 
       // TODO Uhoh, context
       var self = this;
-      
+
       if (_.isUndefined(this.view)) {
         // TODO provide the partially extended view for users to extend
         this.view = Typeahead.ItemView.extend({
@@ -97,7 +98,7 @@
       this.shown = false; // Is the menu shown?
       this.mousedover = false; // Is the mouse over the typeahead (incl. menu)?
     },
-    template: '<input type="text" class="form-control" placeholder="Search" /><ul class="dropdown-menu"></ul>',
+    template: _.template('<input type="text" class="form-control" placeholder="<%- placeholder %>" /><ul class="dropdown-menu"></ul>'),
     nativeEvents: {
       'keyup': 'keyup',
       'keypress': 'keypress',
@@ -109,7 +110,9 @@
     },
     // The render function should be overwritten on extended typeaheads
     render: function() {
-      this.$el.html(this.template);
+      this.$el.html(this.template({
+        placeholder: this.options.placeholder
+      }));
       this.$menu = this.$('ul');
       this.$input = this.$('input');
       return this;
@@ -201,7 +204,7 @@
     },
     mouseenter: function() {
       this.mousedover = true;
-      // TODO Re-add 'active' class to the current target 
+      // TODO Re-add 'active' class to the current target
     },
     mouseleave: function() {
       this.mousedover = false;
