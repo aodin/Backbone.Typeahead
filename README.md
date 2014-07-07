@@ -100,7 +100,7 @@ var Extended = Backbone.Typeahead.extend({
   template: _.template('<input type="text" class="form-control" placeholder="<%- placeholder %>" /><ul class="dropdown-menu"></ul>'),
   render: function() {
     this.$el.html(this.template({
-      placeholder: 'Hello, I am a placeholder!''
+      placeholder: 'Hello, I am a placeholder!'
     }));
 
     // Don't forget these!

@@ -11,6 +11,10 @@
       <h3>Different Template</h3>
       <div id="basic" class="col-lg-4 col-sm-6"></div>
     </div>
+    <div class="row">
+      <h3>Template Variables</h3>
+      <div id="variables" class="col-lg-4 col-sm-6"></div>
+    </div>
   </div>
   <script src="../lib/jquery-1.10.2.min.js"></script>
   <script src="../lib/underscore-1.5.1.min.js"></script>
@@ -29,9 +33,27 @@ var states = [
 var Extended = Backbone.Typeahead.extend({
   template: '<input type="text" class="form-control" placeholder="Find a State!"><ul class="dropdown-menu"></ul>',
 });
+
+var Variables = Backbone.Typeahead.extend({
+  template: _.template('<input type="text" class="form-control" placeholder="<%- placeholder %>" /><ul class="dropdown-menu"></ul>'),
+  render: function() {
+    this.$el.html(this.template({
+      placeholder: this.options.placeholder,
+    }));
+
+    // Don't forget these!
+    this.$menu = this.$('ul');
+    this.$input = this.$('input');
+    return this;
+  }
+});
+
 $(function() {
   var basic = new Extended(states);
   basic.setElement('#basic').render();
+
+  var v = new Variables(states, {placeholder: "Custom Placeholder"});
+  v.setElement('#variables').render();
 });
   </script>
 </body>
