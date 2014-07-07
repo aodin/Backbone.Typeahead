@@ -82,6 +82,37 @@ var typeahead = new Backbone.Typeahead(queryset, {key: 'label', itemTemplate: it
 $('#main').html(typeahead.render().el);
 ```
 
+
+### Using a Different Template
+
+To use a different template for the typeahead itself, I recommend extending the Typeahead object:
+
+```javascript
+var Extended = Backbone.Typeahead.extend({
+  template: '<input type="text" class="form-control" placeholder="Find a State!"><ul class="dropdown-menu"></ul>',
+});
+```
+
+If the new template has variables, the `render` method must also be extended:
+
+```javascript
+var Extended = Backbone.Typeahead.extend({
+  template: _.template('<input type="text" class="form-control" placeholder="<%- placeholder %>" /><ul class="dropdown-menu"></ul>'),
+  render: function() {
+    this.$el.html(this.template({
+      placeholder: 'Hello, I am a placeholder!''
+    }));
+
+    // Don't forget these!
+    this.$menu = this.$('ul');
+    this.$input = this.$('input');
+    return this;
+  }
+});
+```
+
+### Extension
+
 The typeahead was built for easy extension. Check out the `docs` and `tests` for examples.
 
 
