@@ -6,7 +6,7 @@
   "version": "0.1.1",
   "keywords": [
     "backbone",
-    "typeahead",
+    "typeahead"
   ],
   "author": {
     "name": "Aaron O. Ellis",
@@ -14,7 +14,7 @@
   },
   "ignore": [
     "docs",
-    "lib",
+    "lib"
   ],
   "dependencies": {
     "backbone": ">=1.1.0",
