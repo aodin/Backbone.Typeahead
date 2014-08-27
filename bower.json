@@ -1,0 +1,28 @@
+{
+  "name": "Backbone.Typeahead",
+  "description": "A Bootstrap inspired Typeahead for Backbone.js",
+  "homepage": "https://github.com/aodin/Backbone.Typeahead",
+  "main": "./backbone.typeahead.js",
+  "version": "0.1.1",
+  "keywords": [
+    "backbone",
+    "typeahead",
+  ],
+  "author": {
+    "name": "Aaron O. Ellis",
+    "email": "aaronoellis@gmail.com"
+  },
+  "ignore": [
+    "docs",
+    "lib",
+  ],
+  "dependencies": {
+    "backbone": ">=1.1.0",
+    "underscore": ">=1.5.0",
+    "jquery": ">=1.10.0"
+  },
+  "devDependencies": {
+    "sinonjs": ">=1.7.3",
+    "jasmine-sinon": ">=0.3.1"
+  }
+}
