@@ -130,4 +130,4 @@ A minified version and source map are provided. Minification was performed with 
     uglifyjs backbone.typeahead.js -o backbone.typeahead.min.js --source-map backbone.typeahead.min.js.map -c -m
 
 
-> aodin, 2014
+aodin, 2015

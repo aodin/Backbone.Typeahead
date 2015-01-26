@@ -3,7 +3,7 @@
   "description": "A Bootstrap inspired Typeahead for Backbone.js",
   "homepage": "https://github.com/aodin/Backbone.Typeahead",
   "main": "backbone.typeahead.js",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "keywords": [
     "backbone",
     "typeahead"
@@ -23,6 +23,8 @@
   },
   "devDependencies": {
     "sinonjs": ">=1.7.3",
-    "jasmine-sinon": ">=0.3.1"
+    "jasmine-sinon": ">=0.3.1",
+    "bootstrap": "~3.3.2",
+    "jasmine-jquery": "~2.0.6"
   }
 }

@@ -1,4 +1,4 @@
-(function() {
+(function(Backbone, _, $) {
   var Typeahead = function(models, options) {
     // The first parameter 'model' is an optional parameter
     // If given an array, a copy will be made and passed to preInitialize
@@ -18,9 +18,9 @@
     this.preInitialize.call(this, models, options);
     Backbone.View.call(this, options);
     this.postInitialize.call(this);
-  }
+  };
 
-  Typeahead.VERSION = '0.1.1';
+  Typeahead.VERSION = '0.2.0';
   Typeahead.extend = Backbone.View.extend;
 
   // TODO Use a preInit/postInit style view
@@ -35,7 +35,8 @@
       this.parent = options.parent;
     },
     render: function() {
-      this.$el.html(_.template(this.template, this.model.toJSON()));
+      // TODO Template should be cached
+      this.$el.html(_.template(this.template)(this.model.toJSON()));
       return this;
     },
     // TODO Or use triggers instead?
@@ -52,8 +53,8 @@
     preInitialize: function(models, options) {
       // Set sane defaults
       // TODO Allow compound keys? Introspect first model for a default key?
-      options.key || (options.key = 'name');
-      options.limit || (options.limit = 8);
+      options.key = options.key || 'name';
+      options.limit = options.limit || 8;
 
       if (_.isUndefined(options.collection) && _.isArray(models)) {
         // TODO Any properties of collections that options can't handle?
@@ -64,9 +65,6 @@
       // TODO confirm that any given view is a Backbone.View object
       this.view = options.view;
 
-      // TODO Uhoh, context
-      var self = this;
-      
       if (_.isUndefined(this.view)) {
         // TODO provide the partially extended view for users to extend
         this.view = Typeahead.ItemView.extend({
@@ -155,11 +153,11 @@
       // Hide the menu
       this.hide();
       // TODO What other parameters should be in the trigger?
-      this.trigger('selected', model, this.collection)
+      this.trigger('selected', model, this.collection);
       // Empty the results
       this.results = [];
     },
-    activateModel: function(model) {
+    activateModel: function() {
       this.$menu.find('.active').removeClass('active');
     },
     // Misc. events
@@ -182,7 +180,7 @@
         case 27: // escape
           if (!this.shown) return;
           this.hide();
-          break
+          break;
         default:
           this.searchInput();
       }
@@ -277,4 +275,4 @@
 
   Backbone.Typeahead = Typeahead;
 
-}).call(this);
+})(Backbone, _, $);
