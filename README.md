@@ -14,6 +14,8 @@ Need Backbone.js 1.0.0 support? Check out release `v0.1.0`.
 
 By default, the typeahead uses Bootstrap 3 styles. See `docs/bootstrap2.html` for an example using the old Bootstrap styles.
 
+### Demo
+    you can view a demo [here](http://plnkr.co/edit/ScbbVdli4eIsVOmcsvFb?p=preview) 
 
 ### Quickstart
 
