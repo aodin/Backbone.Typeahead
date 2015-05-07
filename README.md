@@ -10,9 +10,7 @@ The typeahead can be installed with [Bower](http://bower.io/):
 
     bower install backbone.typeahead
 
-Need Backbone.js 1.0.0 support? Check out release `v0.1.0`.
-
-By default, the typeahead uses Bootstrap 3 styles. See `docs/bootstrap2.html` for an example using the old Bootstrap styles.
+This project targets Backbone `1.1.0` and above using Bootstrap 3. If you need `1.0.0` support, check out the `v0.1.0` release of the typeahead. For an example using the old Bootstrap styles, see `docs/bootstrap2.html`.
 
 
 ### Quickstart
@@ -120,7 +118,7 @@ var Extended = Backbone.Typeahead.extend({
 
 ### Extension
 
-The typeahead was built for easy extension. Check out the `docs` and `tests` for examples.
+The typeahead was built for easy extension. Check out `docs` and `spec` for examples.
 
 
 ### Minification
@@ -130,4 +128,4 @@ A minified version and source map are provided. Minification was performed with 
     uglifyjs backbone.typeahead.js -o backbone.typeahead.min.js --source-map backbone.typeahead.min.js.map -c -m
 
 
-aodin, 2015
+aodin, 2013-2015
