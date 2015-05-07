@@ -28,7 +28,7 @@
     tagName: 'li',
     events: {
       'click': 'selectItem',
-      'mouseover': 'activateItem',
+      'mouseover': 'activateItem'
     },
     initialize: function(options) {
       // A reference to the parent view (aka the Typeahead) is required
@@ -45,7 +45,7 @@
     },
     activateItem: function() {
       this.parent.activateModel(this.model);
-    },
+    }
   });
 
   _.extend(Typeahead.prototype, Backbone.View.prototype, {
@@ -70,7 +70,7 @@
         this.view = Typeahead.ItemView.extend({
           // Dynamically construct a template with the key
           // TODO Allow the item template to be passed through options
-          template: options.itemTemplate || '<a><%- ' + options.key + ' %></a>',
+          template: options.itemTemplate || '<a><%- ' + options.key + ' %></a>'
         });
       }
 
@@ -103,7 +103,7 @@
       'blur input': 'blur',
       'focus input': 'focus',
       'mouseenter': 'mouseenter',
-      'mouseleave': 'mouseleave',
+      'mouseleave': 'mouseleave'
     },
     // The render function should be overwritten on extended typeaheads
     render: function() {
@@ -270,7 +270,7 @@
       this.$menu.hide();
       this.shown = false;
       return this;
-    },
+    }
   });
 
   Backbone.Typeahead = Typeahead;
