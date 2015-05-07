@@ -1,4 +1,6 @@
 (function(Backbone, _, $) {
+  'use strict';
+
   var Typeahead = function(models, options) {
     // The first parameter 'model' is an optional parameter
     // If given an array, a copy will be made and passed to preInitialize
@@ -6,7 +8,7 @@
       // It is copied to prevent overwrite
       // TODO this copy may be unnecessary
       models = models.slice(0);
-      if (!_.isObject(options)) options = {};
+      if (!_.isObject(options)) {options = {};}
     } else if (_.isObject(models)) {
       options = models;
       // TODO Should also error if no collection was provided in options
@@ -20,7 +22,7 @@
     this.postInitialize.call(this);
   };
 
-  Typeahead.VERSION = '0.2.0';
+  Typeahead.VERSION = '0.2.1';
   Typeahead.extend = Backbone.View.extend;
 
   // TODO Use a preInit/postInit style view
@@ -174,11 +176,11 @@
         case 13: // Enter
           // TODO shown needs to be returned to its original function (as an
           // indicator of whether the menu is currently displayed or not)
-          if (!this.shown) return;
+          if (!this.shown) {return;}
           this.select();
           break;
         case 27: // escape
-          if (!this.shown) return;
+          if (!this.shown) {return;}
           this.hide();
           break;
         default:
@@ -191,11 +193,11 @@
     focus: function() {
       this.focused = true;
       // TODO Only show the menu if no item has been selected
-      if (!this.shown) this.show();
+      if (!this.shown) {this.show();}
     },
     blur: function() {
       this.focused = false;
-      if (!this.mousedover && this.shown) this.hide();
+      if (!this.mousedover && this.shown) {this.hide();}
     },
     mouseenter: function() {
       this.mousedover = true;
@@ -203,7 +205,7 @@
     },
     mouseleave: function() {
       this.mousedover = false;
-      if (!this.focused && this.shown) this.hide();
+      if (!this.focused && this.shown) {this.hide();}
     },
     // Allow the user to change their selection with the keyboard
     keydown: function(evt) {
@@ -214,11 +216,11 @@
     keypress: function(evt) {
       // The suppressKeyPressRepeat check exists because keydown and keypress
       // may fire for the same event
-      if (this.suppressKeyPressRepeat) return;
+      if (this.suppressKeyPressRepeat) {return;}
       this.move(evt);
     },
     move: function(evt) {
-      if (!this.shown) return;
+      if (!this.shown) {return;}
       switch(evt.keyCode) {
         case 9: // Tab
         case 13: // Enter
@@ -240,19 +242,19 @@
       // TODO should there be signals for prev and next?
       var active = this.$menu.find('.active').removeClass('active');
       var prev = active.prev();
-      if (!prev.length) prev = this.$menu.find('li').last();
+      if (!prev.length) {prev = this.$menu.find('li').last();}
       prev.addClass('active');
     },
     nextItem: function() {
       var active = this.$menu.find('.active').removeClass('active');
       var next = active.next();
-      if (!next.length) next = this.$menu.find('li').first();
+      if (!next.length) {next = this.$menu.find('li').first();}
       next.addClass('active');
     },
     // Show or hide the menu depending on the typeahead's state
     show: function() {
       // DO not show if there are no results
-      if (!this.results.length) return;
+      if (!this.results.length) {return;}
       var pos = $.extend(
         {},
         this.$input.position(),
