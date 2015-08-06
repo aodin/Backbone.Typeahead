@@ -1,0 +1,31 @@
+{
+  "name": "backbone.typeahead.js",
+  "version": "0.2.1",
+  "description": "A Bootstrap inspired Typeahead for Backbone.js",
+  "main": "backbone.typeahead.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aodin/Backbone.Typeahead.git"
+  },
+  "keywords": [
+    "Backbone",
+    "Typeahead",
+    "search"
+  ],
+  "author": {
+    "name" : "Aaron O. Ellis",
+    "email" : "aaronoellis@gmail.com",
+    "url" : "http://aaronoellis.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aodin/Backbone.Typeahead/issues"
+  },
+  "homepage": "https://github.com/aodin/Backbone.Typeahead"
+}
