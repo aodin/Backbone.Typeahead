@@ -127,8 +127,10 @@
     // Return the models with a key that matches a portion of the given value
     // TODO compound keys! cached values! the kitchen sink!
     search: function(value) {
+      // Sanitize the input before performing regex search.
+      var sanitizedValue = value.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
       // Use a regex to quickly perform a case-insensitive match
-      var re = new RegExp(value, 'i');
+      var re = new RegExp(sanitizedValue, 'i');
       var key = this.options.key;
       return this.collection.filter(function(model) {
           return re.test(model.get(key));
@@ -201,7 +203,7 @@
     },
     mouseenter: function() {
       this.mousedover = true;
-      // TODO Re-add 'active' class to the current target 
+      // TODO Re-add 'active' class to the current target
     },
     mouseleave: function() {
       this.mousedover = false;
