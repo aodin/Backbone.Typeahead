@@ -95,7 +95,7 @@ describe('Typeahead', function() {
       var t = new Typeahead(states);
       var span = $('<span/>');
       t.setElement(span).render();
-      
+
       expect(span).toContainHtml(Typeahead.template);
     });
 
@@ -131,6 +131,10 @@ describe('Typeahead', function() {
       // TODO Does order of results matter?
       expect(t.search('MI').length).toEqual(2);
       expect(t.search('mi').length).toEqual(2);
+    });
+
+    it('escapes input that would cause regex errors', function() {
+      expect(function(){t.search('MI(');}).not.toThrow();
     });
 
     it('populates the menu when the typeahead has been rendered', function() {
