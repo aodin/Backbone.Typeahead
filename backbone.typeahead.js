@@ -28,6 +28,7 @@
   // TODO Use a preInit/postInit style view
   Typeahead.ItemView = Backbone.View.extend({
     tagName: 'li',
+    className: 'typeahead-item',
     events: {
       'click': 'selectItem',
       'mouseover': 'activateItem'
