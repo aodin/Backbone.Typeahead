@@ -22,7 +22,7 @@
     this.postInitialize.call(this);
   };
 
-  Typeahead.VERSION = '0.2.1';
+  Typeahead.VERSION = '0.3.0';
   Typeahead.extend = Backbone.View.extend;
 
   // TODO Use a preInit/postInit style view

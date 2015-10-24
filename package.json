@@ -1,6 +1,6 @@
 {
   "name": "backbone.typeahead.js",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "A Bootstrap inspired Typeahead for Backbone.js",
   "main": "backbone.typeahead.js",
   "directories": {
