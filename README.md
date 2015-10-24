@@ -10,6 +10,10 @@ The typeahead can be installed with [Bower](http://bower.io/):
 
     bower install backbone.typeahead
 
+or [NPM](https://www.npmjs.com/package/backbone.typeahead.js):
+
+    npm install backbone.typeahead.js
+
 This project targets Backbone `1.1.0` and above using Bootstrap 3. If you need `1.0.0` support, check out the `v0.1.0` release of the typeahead. For an example using the old Bootstrap styles, see `docs/bootstrap2.html`.
 
 
