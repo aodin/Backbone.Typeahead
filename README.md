@@ -19,7 +19,7 @@ This project targets Backbone `1.1.0` and above using Bootstrap 3. If you need `
 
 ### Quickstart
 
-To quickly create a typeahead, provide the the constructor with an array of objects to be searched. By default, the typeahead will search the key `name`.
+To quickly create a typeahead, provide the constructor with an array of objects to be searched. By default, the typeahead will search the key `name`.
 
 ```javascript
 var queryset = [
