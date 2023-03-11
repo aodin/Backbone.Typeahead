@@ -6,15 +6,15 @@ A Bootstrap inspired Typeahead for Backbone.js
 
 ### Install
 
-The typeahead can be installed with [Bower](http://bower.io/):
-
-    bower install backbone.typeahead
-
-or [NPM](https://www.npmjs.com/package/backbone.typeahead.js):
+The typeahead can be installed with [NPM](https://www.npmjs.com/package/backbone.typeahead.js):
 
     npm install backbone.typeahead.js
 
-This project targets Backbone `1.1.0` and above using Bootstrap 3. If you need `1.0.0` support, check out the `v0.1.0` release of the typeahead. For an example using the old Bootstrap styles, see `docs/bootstrap2.html`.
+Or [yarn](https://yarnpkg.com/package/backbone.typeahead.js):
+
+    yarn add backbone.typeahead.js
+
+This project requires Backbone `1.1.0` or later with [Bootstrap 5](https://getbootstrap.com/docs/5.0/getting-started/introduction/). If you need Backbone `1.0.0` support, check out the `v0.1.0` release of the typeahead. For styling examples using older Bootstrap version, see `docs/`.
 
 
 ### Quickstart
@@ -23,10 +23,10 @@ To quickly create a typeahead, provide the constructor with an array of objects 
 
 ```javascript
 var queryset = [
-    {name: 'Super Bass-O-Matic 1976'},
-    {name: 'Jam Hawkers'},
-    {name: 'HiberNol'},
-    {name: 'Colon Blow'},
+  {name: 'Super Bass-O-Matic 1976'},
+  {name: 'Jam Hawkers'},
+  {name: 'HiberNol'},
+  {name: 'Colon Blow'},
 ];
 
 var typeahead = new Backbone.Typeahead(queryset);
@@ -43,7 +43,7 @@ The typeahead will emit a `selected` event when the user selects an item. The se
 
 ```javascript
 typeahead.on('selected', function(model) {
-    console.log('The user has selected:', model);
+  console.log('The user has selected:', model);
 });
 ```
 
@@ -54,10 +54,10 @@ The typeahead is built upon a `Backbone.View` and accepts a `Backbone.Collection
 
 ```javascript
 var queryset = [
-    {name: 'Super Bass-O-Matic 1976'},
-    {name: 'Jam Hawkers'},
-    {name: 'HiberNol'},
-    {name: 'Colon Blow'},
+  {name: 'Super Bass-O-Matic 1976'},
+  {name: 'Jam Hawkers'},
+  {name: 'HiberNol'},
+  {name: 'Colon Blow'},
 ];
 var products = new Backbone.Collection(queryset);
 
@@ -72,10 +72,10 @@ Pass the option `key` to search by a different attribute:
 
 ```javascript
 var queryset = [
-    {label: 'Super Bass-O-Matic 1976', year: 1976},
-    {label: 'Jam Hawkers', year: 1977},
-    {label: 'HiberNol', year: 1988},
-    {label: 'Colon Blow', year: 1983},
+  {label: 'Super Bass-O-Matic 1976', year: 1976},
+  {label: 'Jam Hawkers', year: 1977},
+  {label: 'HiberNol', year: 1988},
+  {label: 'Colon Blow', year: 1983},
 ];
 
 var typeahead = new Backbone.Typeahead(queryset, {key: 'label'});
@@ -127,9 +127,7 @@ The typeahead was built for easy extension. Check out `docs` and `spec` for exam
 
 ### Minification
 
-A minified version and source map are provided. Minification was performed with [UglifyJS2](https://github.com/mishoo/UglifyJS2) using the command:
-
-    uglifyjs backbone.typeahead.js -o backbone.typeahead.min.js --source-map backbone.typeahead.min.js.map -c -m
+A minified version and source map are provided. Minification is performed with [esbuild](https://esbuild.github.io) using the `npm run build` command.
 
 
-aodin, 2013-2015
+aodin, 2013-2023

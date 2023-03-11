@@ -7,7 +7,8 @@
     "doc": "docs"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jasmine spec/typeahead.spec.js",
+    "build": "prettier --write backbone.typeahead.js && esbuild backbone.typeahead.js --bundle --minify --sourcemap --out-extension:.js=.min.js --outdir=. --target=es2018"
   },
   "repository": {
     "type": "git",
@@ -19,13 +20,26 @@
     "search"
   ],
   "author": {
-    "name" : "Aaron O. Ellis",
-    "email" : "aaronoellis@gmail.com",
-    "url" : "http://aaronoellis.com"
+    "name": "Aaron O. Ellis",
+    "email": "aaronoellis@gmail.com",
+    "url": "https://aaronoellis.com"
   },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/aodin/Backbone.Typeahead/issues"
   },
-  "homepage": "https://github.com/aodin/Backbone.Typeahead"
+  "homepage": "https://github.com/aodin/Backbone.Typeahead",
+  "devDependencies": {
+    "bootstrap": "^5.2.3",
+    "esbuild": "^0.17.11",
+    "jasmine": "^4.5.0",
+    "jasmine-jquery": "^2.1.1",
+    "jasmine-sinon": "^0.4.0",
+    "prettier": "^2.8.4"
+  },
+  "dependencies": {
+    "backbone": "^1.4.1",
+    "jquery": "^3.6.4",
+    "underscore": "^1.13.6"
+  }
 }
